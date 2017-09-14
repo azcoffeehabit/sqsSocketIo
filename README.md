@@ -1,2 +1,12 @@
+
 # sqsSocketIo
-An example microservice application which takes an aws SQS message and broadcasts to connected socket.io clients for fun!
+SQS messages to socket.io broadcast with messagePack support
+
+## Usage
+npm install
+npm start
+node socket-client.js
+
+## Developing
+
+### Tools

@@ -1,0 +1,19 @@
+{
+  "name": "sqsSocketIo",
+  "version": "1.0.0",
+  "description": "socket.io client and aws ecs targeted server",
+  "main": "socket-server.js",
+  "dependencies": {
+  	"socket.io": "latest",
+	  "msgpack-lite": "latest",
+	  "aws-sdk": "latest",
+	  "http": "latest"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node socket-server.js"
+  },
+  "author": "Paul K Gaynor",
+  "license": "ISC",
+  "keywords": []
+}
