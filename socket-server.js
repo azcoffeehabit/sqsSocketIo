@@ -1,12 +1,13 @@
 var MessagePack = require('msgpack-lite');
 
-var AWSregion = '<AWS region of your choice>';
-var aws_access_key_id = "<your AWS access Key ID>";
-var aws_secret_access_key = "<your AWS secret access key>";
-var queueURL = '<your SQS queue URL>';
+var AWSregion = 'us-west-2';
+//var aws_access_key_id = "<your AWS access Key ID>";
+//var aws_secret_access_key = "<your AWS secret access key>";
+var queueURL = 'https://sqs.us-west-2.amazonaws.com/623680212266/sqsTest0';
 
 var AWS = require('aws-sdk');
-AWS.config.update({accessKeyId: aws_access_key_id, secretAccessKey: aws_secret_access_key});
+//AWS.config.update({accessKeyId: aws_access_key_id, secretAccessKey: aws_secret_access_key});
+AWS.config.update({});
 AWS.config.update({region: AWSregion});
 
 var sqs = new AWS.SQS();
@@ -76,6 +77,8 @@ SocketServer.on('connection', function(io) {
 		sqs.receiveMessage(params, function(err, data){
 			if(err) {
 				console.log("err:" + err);
+				data.Messages = [];
+				data.Messages[0] = err;
 			}
 			//if we get data from AWS
 			if(data)
