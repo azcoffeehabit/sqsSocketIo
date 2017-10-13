@@ -8,4 +8,4 @@ RUN npm install
 
 EXPOSE 3000
 EXPOSE 8889
-CMD ["npm", "start"]
+ENTRYPOINT ["npm", "start"]
