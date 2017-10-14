@@ -1,7 +1,7 @@
 var io = require('socket.io-client');
 var request = require('request');
 var MessagePack = require('msgpack-lite');
-var socket = io.connect('http://localhost:8889');
+var socket = io.connect('http://localhost:8889', { path: '/client' });
 var messageCount = 0;
 var currentId = 0
 
