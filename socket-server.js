@@ -28,26 +28,31 @@ var params = {
 	WaitTimeSeconds: 20 // seconds - how long should we wait for a message?
 };
 
-//start the socket io server on port 8889
-var SocketServer = require('socket.io')(8889);
+var socketIoOptions = {
+	path: '/client'
+};
 
 // Heartbeat and status server for AWS health checks http on port 3000
-const http = require('http')
-const port = 3000
+const httpServer = require('http');
+const port = 8889;
 
 const requestHandler = (request, response) => {
   console.log(request.url);
-  response.end('OK');
+	if(request.url === '/'){
+		response.end('OK');
+	}
 }
 
-const server = http.createServer(requestHandler)
+const server = httpServer.createServer(requestHandler);
 server.listen(port, (err) => {
   if (err) {
     return console.log('something bad happened', err);
   }
-
   console.log(`server is listening on ${port}`);
-})
+});
+
+//start the socket io server and listen on the httpServer
+var SocketServer = require('socket.io')(server, socketIoOptions);
 
 SocketServer.on('connection', function(io) {
 	console.log("connection");
