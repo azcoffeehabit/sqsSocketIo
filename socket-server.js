@@ -77,8 +77,9 @@ SocketServer.on('connection', function(io) {
 		sqs.receiveMessage(params, function(err, data){
 			if(err) {
 				console.log("err:" + err);
-				data.Messages = [];
-				data.Messages[0] = err;
+				clientData.id += 1;
+				clientData.text = err;
+				emitMessage();
 			}
 			//if we get data from AWS
 			if(data)
