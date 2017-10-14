@@ -54,8 +54,8 @@ server.listen(port, (err) => {
 var SocketServer = require('socket.io')(server, socketIoOptions);
 
 SocketServer.on('connection', function(io) {
-	console.log("connection");
-	var checkSQSDelayMs = 1000;
+	//console.log("connection");
+	var checkSQSDelayMs = 5000;
 
 	function emitMessage (clientId){
 		io.emit("message", MessagePack.encode(clientData));
@@ -74,9 +74,9 @@ SocketServer.on('connection', function(io) {
 				emitMessage();
 				//console.log("Delete Error", err);
 			} else {
-				clientData.id += 1;
-				clientData.text = "Message deleted: " + JSON.stringify(data);
-				emitMessage();
+				//clientData.id += 1;
+				//clientData.text = "Message deleted" + JSON.stringify(data);
+				//emitMessage();
 				//console.log("Message Deleted", data);
 			}
 		});
