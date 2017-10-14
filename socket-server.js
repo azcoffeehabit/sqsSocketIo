@@ -29,7 +29,7 @@ var params = {
 };
 
 var socketIoOptions = {
-	path: '/client'
+	path: '/message'
 };
 
 // Heartbeat and status server for AWS health checks http on port 3000
@@ -39,6 +39,9 @@ const port = 8889;
 const requestHandler = (request, response) => {
   console.log(request.url);
 	if(request.url === '/'){
+		response.end('OK');
+	}
+	if(request.url === '/status'){
 		response.end('OK');
 	}
 }
