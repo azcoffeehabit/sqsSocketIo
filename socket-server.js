@@ -48,7 +48,6 @@ server.listen(port, (err) => {
   if (err) {
     return console.log('something bad happened', err);
   }
-  console.log(`server is listening on ${port}`);
 });
 
 //start the socket io server and listen on the httpServer
@@ -70,9 +69,15 @@ SocketServer.on('connection', function(io) {
 
 		sqs.deleteMessage(deleteParams, function(err, data) {
 			if (err) {
-				console.log("Delete Error", err);
+				clientData.id += 1;
+				clientData.text = err;
+				emitMessage();
+				//console.log("Delete Error", err);
 			} else {
-				console.log("Message Deleted", data);
+				clientData.id += 1;
+				clientData.text = "Message deleted: " + JSON.stringify(data);
+				emitMessage();
+				//console.log("Message Deleted", data);
 			}
 		});
 	}
@@ -81,7 +86,7 @@ SocketServer.on('connection', function(io) {
 	{
 		sqs.receiveMessage(params, function(err, data){
 			if(err) {
-				console.log("err:" + err);
+				//console.log("err:" + err);
 				clientData.id += 1;
 				clientData.text = err;
 				emitMessage();
@@ -89,7 +94,7 @@ SocketServer.on('connection', function(io) {
 			//if we get data from AWS
 			if(data)
 			{
-				console.log("SQS data: " + JSON.stringify(data));
+				//console.log("SQS data: " + JSON.stringify(data));
 				// If there are any messages
 				if (data.Messages)
 				{
@@ -112,7 +117,10 @@ SocketServer.on('connection', function(io) {
 				}
 			}
 			else {
-				console.log("no data from AWS");
+				clientData.id += 1;
+				clientData.text = "No data from AWS";
+				emitMessage();
+				//console.log("no data from AWS");
 			}
 		});
 	}
