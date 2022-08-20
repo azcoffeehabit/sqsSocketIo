@@ -1,12 +1,14 @@
 {
   "name": "sqsSocketIo",
   "version": "1.0.0",
-  "description": "socket.io client and aws ecs targeted server",
+  "description": "socket.io sever for azure eventhub messages",
   "main": "socket-server.js",
   "dependencies": {
   	"socket.io": "latest",
 	  "msgpack-lite": "latest",
-	  "aws-sdk": "latest",
+    "azure/event-hubs": "latest",
+	  "azure/strorage-blobs": "latest",
+    "azure/eventhubs-checkpointstore-blob": "latest",
 	  "http": "latest"
   },
   "devDependencies": {},
@@ -14,6 +16,6 @@
     "start": "node socket-server.js"
   },
   "author": "Paul K Gaynor",
-  "license": "ISC",
+  "license": "Copyright Paul K Gaynor",
   "keywords": []
 }
